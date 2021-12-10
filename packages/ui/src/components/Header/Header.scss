@@ -1,0 +1,18 @@
+// SPDX-License-Identifier: MIT
+
+.header-container {
+  color: white;
+  .navbar {
+    display: block;
+    background-color: black;
+    padding: 2rem;
+    .navbar-items {
+      .slash {
+        margin-right: 1rem;
+        font-weight: 700;
+        color: #00adef;
+      }
+      cursor: pointer;
+    }
+  }
+}

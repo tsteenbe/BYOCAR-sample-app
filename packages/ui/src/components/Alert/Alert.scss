@@ -1,0 +1,20 @@
+// SPDX-License-Identifier: MIT
+
+.alert-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 40%;
+}
+
+::v-deep .close {
+  border: none;
+  background: none;
+  color: red;
+  font-size: 1.5rem;
+  position: absolute;
+  right: 1%;
+  top: 1%;
+}

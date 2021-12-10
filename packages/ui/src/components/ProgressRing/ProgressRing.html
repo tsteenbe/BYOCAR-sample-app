@@ -1,0 +1,34 @@
+<!-- SPDX-License-Identifier: MIT -->
+
+<div class="progress-ring-container">
+  <div class="ring-container">
+    <svg :height="radius * 2" :width="radius * 2">
+      <circle
+        :stroke="ringColor"
+        :stroke-dasharray="circumference + ' ' + circumference"
+        :style="{ strokeDashoffset: strokeDashoffset }"
+        :stroke-width="stroke"
+        fill="transparent"
+        :r="normalizedRadius"
+        :cx="radius"
+        :cy="radius"
+      />
+    </svg>
+  </div>
+  <font-awesome-icon :icon="setIcon" />
+  <div class="car-data-container">
+    <p
+      v-if="typeof(dashboardItemValue) === 'number' && dashboardItemValue >= 0"
+    >
+      {{ dashboardItemValue }}
+    </p>
+    <ErrorToolTip
+      v-else
+      placement="bottom"
+      :toolTipTitle="toolTipTitle"
+    />
+  </div>
+  <div class="text-container">
+    <p>{{ text }}</p>
+  </div>
+</div>

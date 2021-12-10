@@ -1,0 +1,18 @@
+{
+  "name": "sample-app",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "start": "lerna run start --stream",
+    "bootstrap": "lerna bootstrap",
+    "test": "lerna run test",
+    "clean": "rm -rf node_modules/ && lerna clean",
+    "lerna": "lerna",
+    "prettier:check": "npx prettier --check .",
+    "prettier:fix": "npx prettier --write ."
+  },
+  "devDependencies": {
+    "lerna": "^4.0.0",
+    "prettier": "2.4.1"
+  }
+}

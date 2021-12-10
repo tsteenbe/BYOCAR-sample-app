@@ -1,0 +1,126 @@
+openapi: "3.0.0"
+info:
+  description: "This API accepts a VIN and provides you with its Vehicle Images and Electric charge/Fuel status"
+  version: "1.0.0"
+  title: "Sample App - Vehicle Data API"
+servers:
+  - url: http://localhost:3000/api/
+paths:
+  "/vehicle/{vehicleId}":
+    get:
+      summary: Get vehicle data by Vehicle ID
+      description: >
+        The response object will have fields that are set depending on the type of the vehicle:
+        For an electric vehicle, the API will respond with `rangeelectric` and `soc`,
+        while the response object for a car with a combustion engine, the response will include `rangeliquid` and `tanklevelpercent`.
+        For hybrid cars, all data points will be included.
+        Data may not be included in the response if it was not submitted by the vehicle or the data could not be retrieved.
+        If requests failed, error information will be included in the optional fields `fuelstatusError` or `electricvehicleError`.
+      parameters:
+        - description: Vehicle identification number (VIN)
+          in: path
+          name: vehicleId
+          required: true
+          schema:
+            type: string
+            example: "WDD2132231A444556"
+        - description: Authorization Code
+          in: header
+          name: X-Authorization-Code
+          required: true
+          schema:
+            type: string
+            example: goO9Fk2q_4nBaFso-miHSbQPzihu8pmhXFVpmeYw
+      responses:
+        "200":
+          description: Vehicle data was fetched successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VehicleData"
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: User is not authorized to access the api. (e.g., token is expired)
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Vehicle not found.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Internal Server Error.
+      tags:
+        - Vehicle Data
+components:
+  schemas:
+    VehicleData:
+      title: Vehicle data schema
+      type: object
+      properties:
+        fuelstatusError:
+          $ref: "#/components/schemas/ApiErrorSchema"
+        electricvehicleError:
+          $ref: "#/components/schemas/ApiErrorSchema"
+        rangeliquid:
+          description: Liquid fuel tank range.
+          type: object
+          properties:
+            value:
+              type: number
+              example: 300
+        tanklevelpercent:
+          description: Liquid fuel tank level.
+          type: object
+          properties:
+            value:
+              type: number
+              example: 90
+        rangeelectric:
+          description: Electric range.
+          type: object
+          properties:
+            value:
+              type: number
+              example: 300
+        soc:
+          description: Displayed state of charge for the HV battery.
+          type: object
+          properties:
+            value:
+              type: number
+              example: 90
+        imageUrls:
+          type: array
+          items:
+            type: string
+          example:
+            - "http://localhost:3000/images/EXT10-WDD2132231A444556.png"
+            - "http://localhost:3000/images/INT1-WDD2132231A444556.png"
+    ApiErrorSchema:
+      description: Error object to indicate an API request failed and data could not be retrieved
+      type: object
+      properties:
+        status:
+          description: HTTP status code of the failed API call
+          type: number
+          example: 404
+        errorDetails:
+          description: Detailed information about the error that occured when trying to retrieve vehicle data
+          type: object
+          example:
+            exveErrorId: "104"
+            exveErrorMsg: "Not Found"
+            exveErrorRef: "d0ba84e3-6303-4e41-87d9-6adc8f4d5696"
+    ErrorResponse:
+      title: Error response schema
+      type: object
+      properties:
+        message:
+          type: string

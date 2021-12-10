@@ -1,0 +1,48 @@
+// SPDX-License-Identifier: MIT
+
+.start-page-container {
+  .image-container {
+    img {
+      height: 70vh;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+  .input-container {
+    padding: 2rem;
+    background: black;
+    .input-label {
+      color: white;
+      padding: 1px;
+    }
+    .input-field {
+      display: flex;
+      padding: 10px 0px 25px 0px;
+      input {
+        background: black;
+        color: white;
+        border: 1px solid white;
+        border-radius: 5px;
+        height: 45px;
+        width: 350px;
+        padding: 1px 1px 1px 20px;
+        outline: none;
+      }
+    }
+    .input-button {
+      color: white;
+      background-color: black;
+      border: 1px solid white;
+      border-radius: 5px;
+      font-size: inherit;
+      height: 45px;
+      width: 150px;
+    }
+  }
+  .loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 10;
+  }
+}

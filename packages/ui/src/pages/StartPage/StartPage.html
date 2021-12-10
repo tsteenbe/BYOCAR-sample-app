@@ -1,0 +1,36 @@
+<!-- SPDX-License-Identifier: MIT -->
+
+<div>
+  <Header/>
+  <div class="start-page-container">
+    <div class="image-container">
+      <img
+        src="https://assets.oneweb.mercedes-benz.com/plugin/vs/vs-3.6.6/placeholders/compact_1360.jpg"
+        alt="mercedes-benz-car"
+      />
+    </div>
+    <div class="input-container">
+      <form @submit.prevent="authenticateUser()" autocomplete="off">
+        <div class="input-label">
+          <label>Enter your VIN</label>
+        </div>
+        <div class="input-field">
+          <input
+            v-model.trim="vehicleId"
+            placeholder="e.g., WDB111111ZZZ22222"
+            maxlength="17"
+          />
+          <ErrorToolTip
+            v-if="errorMessage !== ''"
+            :toolTipTitle="errorMessage"
+            placement="right"
+          />
+        </div>
+        <div>
+          <button type="submit" class="input-button">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <Alert v-show="alertMessage !== ''" title="Error" :message="alertMessage" />
+</div>

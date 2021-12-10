@@ -1,0 +1,5 @@
+# Directory for downloaded images
+public/images/
+
+# Files downloaded in tests
+!public/images/INT1-WDD2054661F444556.png

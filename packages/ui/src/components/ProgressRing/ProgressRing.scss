@@ -1,0 +1,26 @@
+// SPDX-License-Identifier: MIT
+
+.progress-ring-container {
+  position: relative;
+  width: fit-content;
+  padding: 2rem;
+  text-align: center;
+  color: white;
+  circle {
+    transition: stroke-dashoffset 0.35s;
+    transform-origin: 50% 50%;
+  }
+  .svg-inline--fa {
+    position: absolute;
+    top: calc(50% - 60px);
+    left: calc(50% - 22.5px);
+    width: 45px;
+    height: 45px;
+  }
+  .car-data-container {
+    position: absolute;
+    width: 160px;
+    top: calc(50% - 10px);
+    font-size: 25px;
+  }
+}

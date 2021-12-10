@@ -1,0 +1,55 @@
+<!-- SPDX-License-Identifier: MIT -->
+
+<div>
+  <Header/>
+  <div class="dashboard-page-container">
+    <Carousel :carouselImages="carouselImages" :toolTipTitle="toolTipTitle" />
+    <div class="dashboard-container" v-if="vehicleData !== {}">
+      <ProgressRing
+        text="State of charge (%)"
+        icon="battery-three-quarters"
+        toolTipTitle="could not fetch state of charge"
+        v-if="vehicleData.soc !== undefined || vehicleData.electricvehicleError"
+        :ringColor="setRingColor(vehicleData.soc)"
+        :dashboardItemValue="vehicleData.soc"
+        :radius="80"
+        :progress="setProgress(vehicleData.soc)"
+        :stroke="8"
+      />
+      <ProgressRing
+        text="Electric Range (KM)"
+        icon="tachometer-alt"
+        toolTipTitle="could not fetch electric range"
+        v-if="vehicleData.rangeelectric !== undefined || vehicleData.electricvehicleError"
+        :ringColor="setRingColor(vehicleData.rangeelectric)"
+        :dashboardItemValue="vehicleData.rangeelectric"
+        :radius="80"
+        :progress="100"
+        :stroke="8"
+      />
+      <ProgressRing
+        text="Tank Level (%)"
+        icon="gas-pump"
+        toolTipTitle="could not fetch tank level"
+        v-if="vehicleData.tanklevelpercent !== undefined || vehicleData.fuelstatusError"
+        :ringColor="setRingColor(vehicleData.tanklevelpercent)"
+        :dashboardItemValue="vehicleData.tanklevelpercent"
+        :radius="80"
+        :progress="setProgress(vehicleData.tanklevelpercent)"
+        :stroke="8"
+      />
+      <ProgressRing
+        text="Fuel Range (KM)"
+        icon="tachometer-alt"
+        toolTipTitle="could not fetch fuel range"
+        v-if="vehicleData.rangeliquid !== undefined || vehicleData.fuelstatusError"
+        :ringColor="setRingColor(vehicleData.rangeliquid)"
+        :dashboardItemValue="vehicleData.rangeliquid"
+        :radius="80"
+        :progress="100"
+        :stroke="8"
+      />
+    </div>
+  </div>
+  <Alert v-show="alertMessage !== ''" title="Error" :message="alertMessage" />
+</div>

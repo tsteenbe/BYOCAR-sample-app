@@ -1,0 +1,11 @@
+// SPDX-License-Identifier: MIT
+
+.dashboard-page-container {
+  .dashboard-container {
+    background-color: black;
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+}
